@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Especialidad extends Model
+{
+    use HasFactory;
+    use SoftDeletes;
+
+    protected $fillable = [
+        'nombre'
+    ];
+
+    public function cuidador()
+    {
+        return $this->hasMany(Cuidador_Especialidad::class, 'id_especialidad');
+    }
+
+}

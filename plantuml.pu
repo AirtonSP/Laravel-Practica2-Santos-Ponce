@@ -1,0 +1,89 @@
+@startuml Zoologico
+
+class Animales {
+  + id: int (PK)
+  + id_especie: int (FK)
+  + nombre: string
+  + edad: int
+  + estado: string
+  + territorio: string
+}
+
+class Especies {
+  + id: int (PK)
+  + tipo: string
+}
+
+class Recintos {
+  + id: int (PK)
+  + nombre: string
+  + territorio: string
+}
+
+class Cuidadores {
+  + id: int (PK)
+  + nombre: string
+  + edad: int
+}
+
+class Actividades {
+  + id: int (PK)
+  + nombre: string
+  + dia: string
+  + hora: string
+}
+
+class Especialidades {
+  + id: int (PK)
+  + nombre: string
+}
+
+class Animales_Recintos {
+  + id: int (PK)
+  + id_animal: int (FK)
+  + id_recinto: int (FK)
+}
+
+class Animales_Cuidadores {
+  + id: int (PK)
+  + id_animal: int (FK)
+  + id_cuidador: int (FK)
+}
+
+class Especies_Recintos {
+  + id: int (PK)
+  + id_especie: int (FK)
+  + id_recinto: int (FK)
+}
+
+class Cuidadores_Especialidades {
+  + id: int (PK)
+  + id_cuidador: int (FK)
+  + id_especialidad: int (FK)
+}
+
+class Actividades_Animales {
+  + id: int (PK)
+  + id_actividad: int (FK)
+  + id_animal: int (FK)
+}
+
+
+Animales "m" -- "1" Especies
+Animales "1" -- "m" Animales_Recintos
+Animales "1" -- "m" Animales_Cuidadores
+Animales "1" -- "m" Actividades_Animales
+
+Especies "1" -- "m" Especies_Recintos
+
+Recintos "1" -- "m" Animales_Recintos
+Recintos "1" -- "m" Especies_Recintos
+
+Cuidadores "1" -- "m" Animales_Cuidadores
+Cuidadores "1" -- "m" Cuidadores_Especialidades
+
+Actividades_Animales "m" -- "1" Actividades
+
+Especialidades	"1" -- "m" Cuidadores_Especialidades
+
+@enduml
